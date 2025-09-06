@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiran Potawale - .NET Full Stack Developer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #00ff88;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #00ff88;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ff88, #00d4ff, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+            to { text-shadow: 0 0 30px rgba(0, 212, 255, 0.8); }
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #aaa;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem 1rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            border-radius: 15px;
+            color: #000;
+        }
+
+        .skill-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #00ff88, #00d4ff);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 0 2rem;
+            flex: 1;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #00ff88;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 4px solid #0a0a0a;
+        }
+
+        .company {
+            color: #00ff88;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .role {
+            color: #00d4ff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .project-title {
+            color: #00ff88;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            color: #00ff88;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Awards Section */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .award-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .award-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .award-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: #000;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: top 0.3s ease;
+            }
+
+            .nav-links.active {
+                top: 70px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                padding-left: 60px;
+            }
+
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section {
+                padding: 60px 1rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">KP</a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+                <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+                <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+                <li><a href="#awards" onclick="closeMenu()">Awards</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1>Kiran Potawale</h1>
+            <h2>.NET Full Stack Developer</h2>
+            <p>Passionate developer with 5+ years of experience in building scalable web applications, microservices, and financial platforms. Specialized in .NET Core, React, and cloud technologies.</p>
+            <a href="#contact" class="cta-button">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="fade-in">About Me</h2>
+        <div class="fade-in">
+            <p style="text-align: center; font-size: 1.2rem; color: #ccc; max-width: 800px; margin: 0 auto;">
+                Senior Software Engineer with expertise in .NET Core, microservices, and full-stack development. 
+                Currently working at Neosoft on financial applications for Mirae Asset Capital Market. 
+                Proven track record of delivering scalable solutions and leading development teams across various industries including healthcare, finance, and project management.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2 class="fade-in">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card fade-in">
+                <div class="skill-icon">C#</div>
+                <div class="skill-name">C#</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">.NET</div>
+                <div class="skill-name">.NET Core</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🌐</div>
+                <div class="skill-name">ASP.NET MVC</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🔗</div>
+                <div class="skill-name">Web API</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🏗️</div>
+                <div class="skill-name">Microservices</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🗄️</div>
+                <div class="skill-name">SQL Server</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🐬</div>
+                <div class="skill-name">MySQL</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">📊</div>
+                <div class="skill-name">Entity Framework</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">⚛️</div>
+                <div class="skill-name">ReactJS</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">☸️</div>
+                <div class="skill-name">Kubernetes</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🐳</div>
+                <div class="skill-name">Docker</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🔧</div>
+                <div class="skill-name">Jenkins</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">☁️</div>
+                <div class="skill-name">Azure & AWS</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">🔍</div>
+                <div class="skill-name">Elasticsearch</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">⚡</div>
+                <div class="skill-name">Redis Cache</div>
+            </div>
+            <div class="skill-card fade-in">
+                <div class="skill-icon">📈</div>
+                <div class="skill-name">Grafana</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2 class="fade-in">Professional Experience</h2>
+        <div class="experience-timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item slide-left">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="company">Neosoft, Mumbai</div>
+                    <div class="role">Software Engineer</div>
+                    <div class="duration">MAY 2024 - PRESENT</div>
+                    <p>Working on client-side project for Mirae Asset Capital Market, developing financial reports, analyzing historical data for stock performance visualization, and implementing real-time alert systems for stock prices and positions.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item slide-right">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="company">Collabera Digital, Pune</div>
+                    <div class="role">Senior Software Engineer</div>
+                    <div class="duration">JULY 2022 - MAY 2024</div>
+                    <p>Developed robust web applications using ASP.NET, MVC, .NET Core, and microservices. Integrated APIs seamlessly with RESTful services and optimized website performance through caching techniques and efficient stored procedures.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item slide-left">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="company">Thyrocare, Navi Mumbai</div>
+                    <div class="role">Senior Software Engineer</div>
+                    <div class="duration">JULY 2020 - JULY 2022</div>
+                    <p>Designed and developed web applications, APIs, and desktop applications. Managed internal development team, created technical documentation, and implemented database optimization techniques for improved performance.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item slide-right">
+                <div class="timeline-content">
+                    <div class="timeline-dot"></div>
+                    <div class="company">Nirvaa Solution Pvt. Ltd.</div>
+                    <div class="role">Assistant Software Developer</div>
+                    <div class="duration">SEPT 2019 - JUNE 2020</div>
+                    <p>Developed web and desktop applications for sales, services, and building management systems. Created user-friendly software solutions and provided technical support for existing systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2 class="fade-in">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-title">mStock 2.0</div>
+                <p>Developed scalable microservices and RESTful APIs for stock market platform. Implemented real-time data processing using Kafka and NATS, with comprehensive monitoring through Grafana and Prometheus.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">.NET Core</span>
+                    <span class="tech-tag">Microservices</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Kafka</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">ElasticSearch</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-title">ALCON</div>
+                <p>Project management system for resource allocation and operational workflows. Enhanced MVC application with new microservices and optimized system performance through database tuning.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">ASP.NET MVC</span>
+                    <span class="tech-tag">.NET Core</span>
+                    <span class="tech-tag">Microservices</span>
+                    <span class="tech-tag">SQL Server</span>
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">Entity Framework</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-title">CliSo</div>
+                <p>Healthcare web application with RESTful APIs for doctor and laboratory registrations, patient test bookings, and seamless integration between app and website functionalities.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">ASP.NET MVC</span>
+                    <span class="tech-tag">.NET Core Web API</span>
+                    <span class="tech-tag">SQL Server</span>
+                    <span class="tech-tag">Entity Framework</span>
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">Payment Integration</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="section">
+        <h2 class="fade-in">Awards & Recognition</h2>
+        <div class="awards-grid">
+            <div class="award-card fade-in">
+                <div class="award-icon">🏆</div>
+                <h3>CliSo Project Recognition</h3>
+                <p>Received promotion and appreciation letter for outstanding work on client project</p>
+            </div>
+            <div class="award-card fade-in">
+                <div class="award-icon">⭐</div>
+                <h3>mStock 2.0 Excellence</h3>
+                <p>Got appreciation from client for delivering high-quality microservices solution</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="fade-in">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info fade-in">
+                <h3 style="margin-bottom: 2rem; color: #00ff88;">Contact Information</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong>Location</strong><br>
+                        Navi Mumbai, Maharashtra-410209
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <strong>Phone</strong><br>
+                        +91 8898656980
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <strong>Email</strong><br>
+                        kiranpotawale@gmail.com
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <strong>LinkedIn</strong><br>
+                        <a href="#" style="color: #00ff88;">View Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form fade-in">
+                <h3 style="margin-bottom: 2rem; color: #00ff88;">Send Message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Kiran Potawale. All rights reserved. | Designed with ❤️ and lots of ☕</p>
+    </footer>
+
+    <script>
+        // Particles.js configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#00ff88'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#00ff88',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-left, .slide-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Skill cards animation delay
+        document.querySelectorAll('.skill-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Project cards animation delay
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.2}s`;
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert(`Thank you ${name}! Your message has been received. I'll get back to you soon!`);
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Typing animation for hero section
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+
+        // Initialize typing animation when page loads
+        window.addEventListener('load', function() {
+            const heroTitle = document.querySelector('.hero h1');
+            const heroSubtitle = document.querySelector('.hero h2');
+            const heroDesc = document.querySelector('.hero p');
+            
+            // Add fade-in animation to elements
+            setTimeout(() => {
+                heroTitle.style.opacity = '1';
+                heroTitle.style.transform = 'translateY(0)';
+            }, 500);
+            
+            setTimeout(() => {
+                heroSubtitle.style.opacity = '1';
+                heroSubtitle.style.transform = 'translateY(0)';
+            }, 1000);
+            
+            setTimeout(() => {
+                heroDesc.style.opacity = '1';
+                heroDesc.style.transform = 'translateY(0)';
+            }, 1500);
+        });
+
+        // Add hover effects to timeline items
+        document.querySelectorAll('.timeline-content').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderColor = '#00ff88';
+                this.style.boxShadow = '0 15px 30px rgba(0, 255, 136, 0.2)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Add floating animation to skill cards
+        document.querySelectorAll('.skill-card').forEach((card, index) => {
+            setInterval(() => {
+                if (!card.matches(':hover')) {
+                    card.style.transform = `translateY(${Math.sin(Date.now() * 0.002 + index) * 5}px)`;
+                }
+            }, 50);
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            const parallaxSpeed = 0.5;
+            
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add cursor trail effect
+        let mouseX = 0;
+        let mouseY = 0;
+        let trail = [];
+
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function createTrail() {
+            const trailElement = document.createElement('div');
+            trailElement.style.cssText = `
+                position: fixed;
+                width: 6px;
+                height: 6px;
+                background: radial-gradient(circle, #00ff88, transparent);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                left: ${mouseX}px;
+                top: ${mouseY}px;
+                opacity: 1;
+                transform: translate(-50%, -50%);
+                transition: opacity 0.5s ease;
+            `;
+            
+            document.body.appendChild(trailElement);
+            
+            setTimeout(() => {
+                trailElement.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(trailElement);
+                }, 500);
+            }, 100);
+        }
+
+        // Create trail effect periodically
+        setInterval(createTrail, 50);
+
+        // Add scroll progress indicator
+        const progressBar = document.createElement('div');
+        progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #00ff88, #00d4ff);
+            z-index: 10000;
+            transition: width 0.1s ease;
+        `;
+        document.body.appendChild(progressBar);
+
+        window.addEventListener('scroll', function() {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+
+        // Add easter egg - Konami code
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // Up Up Down Down Left Right Left Right B A
+
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.length === konamiSequence.length && 
+                konamiCode.every((code, index) => code === konamiSequence[index])) {
+                // Easter egg activated!
+                document.body.style.filter = 'hue-rotate(180deg)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 3000);
+                
+                // Show special message
+                const message = document.createElement('div');
+                message.innerHTML = '🎉 Easter Egg Activated! 🎉';
+                message.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(45deg, #00ff88, #00d4ff);
+                    color: #000;
+                    padding: 20px 40px;
+                    border-radius: 20px;
+                    font-size: 24px;
+                    font-weight: bold;
+                    z-index: 10001;
+                    animation: bounce 1s infinite;
+                `;
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    document.body.removeChild(message);
+                }, 3000);
+                
+                konamiCode = [];
+            }
+        });
+
+        // Add CSS for bounce animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% {
+                    transform: translate(-50%, -50%) translateY(0);
+                }
+                40% {
+                    transform: translate(-50%, -50%) translateY(-30px);
+                }
+                60% {
+                    transform: translate(-50%, -50%) translateY(-15px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
